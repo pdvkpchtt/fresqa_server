@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+require("dotenv").config();
 
 const sendVerificationMail = async (email, token) => {
   const transporter = nodemailer.createTransport({
@@ -9,6 +10,8 @@ const sendVerificationMail = async (email, token) => {
       pass: process.env.EMAIL_SERVER_PASSWORD,
     },
   });
+
+  console.log(process.env.EMAIL_SERVER_HOST, "process.env.EMAIL_SERVER_HOST");
 
   const mailOptions = {
     from: process.env.EMAIL_FROM,
