@@ -124,6 +124,8 @@ router.post("/register", async (req, res) => {
     if (!validatedFields.success)
       return res.status(500).json({ error: "Check the registration details" });
 
+    console.log(validatedFields, "validatedFields");
+
     const { email, username } = validatedFields.data;
     // валидация полей
 
@@ -139,6 +141,8 @@ router.post("/register", async (req, res) => {
       });
     // проверка, есть ли юзер с таким емалом
 
+    console.log(existingUser, "existingUser");
+
     // костыль или защита от даолбаеба (не спрашивайте)
     await prisma.user.update({
       where: { email: email?.toLowerCase() },
@@ -152,6 +156,8 @@ router.post("/register", async (req, res) => {
     const verificationToken = await generateVerificationToken(
       email.toLowerCase()
     );
+
+    console.log(verificationToken, "verificationToken");
 
     await sendVerificationMail(
       verificationToken.email.toLowerCase(),
