@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json()); // из за этой строки я убил все нервные клетки
 app.use(
   cors({
-    origin: "*",
+    origin: "http://localhost:5000",
     credentials: true,
   })
 );
