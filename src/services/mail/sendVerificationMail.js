@@ -23,8 +23,6 @@ const sendVerificationMail = async (email, token) => {
   };
 
   await transporter.sendMail(mailOptions);
-
-  await transporter.sendMail(mailOptions);
 };
 
 module.exports = sendVerificationMail;
