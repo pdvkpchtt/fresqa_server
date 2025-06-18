@@ -117,6 +117,7 @@ router
 
 router.post("/register", async (req, res) => {
   try {
+    console.log(req.body);
     // валидация полей
     const validatedFields = RegisterSchema.safeParse(req.body);
 
