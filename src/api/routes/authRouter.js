@@ -165,6 +165,8 @@ router.post("/register", async (req, res) => {
     );
     // токен
 
+    console.log("token sent");
+
     return res.status(200).json({
       message: `The letter has been sent to the email ${email.toLowerCase()}`,
     });
