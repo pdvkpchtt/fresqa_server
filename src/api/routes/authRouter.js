@@ -101,10 +101,10 @@ router
         email.toLowerCase()
       );
 
-      await sendVerificationMail(
-        verificationToken.email.toLowerCase(),
-        verificationToken.token
-      );
+      // await sendVerificationMail(
+      //   verificationToken.email.toLowerCase(),
+      //   verificationToken.token
+      // );
       // токен
 
       return res.status(200).json({
