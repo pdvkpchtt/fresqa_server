@@ -12,12 +12,7 @@ const { initializeViewPorts } = require("./services/viewPortService");
 const app = express();
 
 app.use(express.json()); // из за этой строки я убил все нервные клетки
-app.use(
-  cors({
-    origin: "http://localhost:5000",
-    credentials: true,
-  })
-);
+app.use(cors());
 app.use(bodyParser.json());
 
 // храним экспресс сессию в призме
