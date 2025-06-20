@@ -3,10 +3,10 @@
   "maxConcurrentTestsPerUser": 3,
   "systemInfo": {
     "totalMemory": 8420433920,
-    "freeMemory": 1331097600,
+    "freeMemory": 2355154944,
     "cpuCount": 4,
     "systemLoad": 0,
-    "memoryUsage": "84.19%"
+    "memoryUsage": "72.03%"
   },
   "queueStats": {
     "totalTests": 0,
@@ -15,5 +15,5 @@
     "completedTests": 0,
     "failedTests": 0
   },
-  "lastUpdate": "2025-06-15T14:09:15.344Z"
+  "lastUpdate": "2025-06-20T10:05:42.422Z"
 }

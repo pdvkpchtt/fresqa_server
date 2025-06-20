@@ -171,6 +171,7 @@ router.post("/register", async (req, res) => {
       message: `The letter has been sent to the email ${email.toLowerCase()}`,
     });
   } catch (err) {
+    console.log(err);
     return res.status(500).json({ error: "Something went wrong" });
   }
 });
