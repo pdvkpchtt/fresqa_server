@@ -159,10 +159,10 @@ router.post("/register", async (req, res) => {
 
     console.log(verificationToken, "verificationToken");
 
-    await sendVerificationMail(
-      verificationToken.email.toLowerCase(),
-      verificationToken.token
-    );
+    // await sendVerificationMail(
+    //   verificationToken.email.toLowerCase(),
+    //   verificationToken.token
+    // );
     // токен
 
     console.log("token sent");
