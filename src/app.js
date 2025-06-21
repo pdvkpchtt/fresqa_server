@@ -8,41 +8,41 @@ const {
   initializeWebElementActions,
 } = require("./services/webElementActionsService");
 const { initializeViewPorts } = require("./services/viewPortService");
-const { Pool } = require("pg");
-const pgSession = require("connect-pg-simple")(session);
-
-const pool = new Pool({
-  connectionString:
-    "postgresql://gen_user:LdlM1Zr0cf@46.149.66.179:5432/default_db",
-});
 
 const app = express();
 
+app.set("view engine", "ejs");
 app.use(express.json()); // из за этой строки я убил все нервные клетки
 app.use(
   cors({
-    origin: [
-      "http://localhost:5000",
-      "https://pdvkpchtt-fresqa-server-3721.twc1.net/",
-    ],
+    origin: "http://localhost:5000",
     credentials: true,
   })
 );
 app.use(bodyParser.json());
 
 // храним экспресс сессию в призме
+const store = new (connectPgSimple(session))({ createTableIfMissing: true });
 app.use(
   session({
-    store: new pgSession({
-      pool, // Подключение к Postgres
-      tableName: "session", // Можно изменить имя таблицы
-    }),
-    secret: "secret",
-    resave: false,
+    store,
+    secret: "myscecret",
     saveUninitialized: false,
-    cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 дней
+    resave: false,
+    cookie: {
+      secure: true,
+      httpOnly: true,
+      sameSite: "none",
+      maxAge: 1000 * 60 * 60 * 24 * 7 * 30,
+    },
   })
 );
+// 4. Проверка сессии
+app.use((req, res, next) => {
+  console.log("Session ID:", req.sessionID);
+  console.log("Session data:", req.session);
+  next();
+});
 // храним экспресс сессию в призме
 
 app.get("/", async (req, res) => {
