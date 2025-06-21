@@ -38,11 +38,11 @@ app.use(
 );
 // храним экспресс сессию в призме
 
-app.get("/", async (req, res) => {
-  req.session.destroy();
-  console.log(req.session?.user);
-  res.send("/ass");
-});
+// app.get("/", async (req, res) => {
+//   req.session.destroy();
+//   console.log(req.session?.user);
+//   res.send("/ass");
+// });
 
 // Роуты
 app.use("/api", router);
