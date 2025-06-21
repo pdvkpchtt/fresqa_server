@@ -30,13 +30,13 @@ async function initializeWebElementActions() {
   for (const action of predefinedActions) {
     try {
       // Проверяем, существует ли уже запись с таким именем
-      const existingAction = await prisma.webElementActions.findFirst({
+      const existingAction = await prisma.WebElementActions.findFirst({
         where: { name: action.name },
       });
 
       if (!existingAction) {
         // Если записи нет, создаем новую
-        await prisma.webElementActions.create({
+        await prisma.WebElementActions.create({
           data: {
             name: action.name,
             withValue: action.withValue,

@@ -13,6 +13,8 @@ const webElementActionRoutes = require("./routes/webElementActionsRoutes");
 const generateTestRoutes = require("./routes/generateTestRoutes");
 const licenseRoute = require("./routes/licenseRoutes");
 const botRoutes = require("./routes/botRoutes");
+const testExportImportRoutes = require("./routes/testExportImportRoutes");
+const parserRoutes = require("./routes/parserRoutes");
 
 const router = express.Router();
 
@@ -29,5 +31,7 @@ router.use("/webelementactions", webElementActionRoutes);
 router.use("/generate-tests", generateTestRoutes);
 router.use("/license", licenseRoute);
 router.use("/bot", botRoutes);
+router.use("/test-export-import", testExportImportRoutes);
+router.use("/parser", parserRoutes);
 
 module.exports = router;

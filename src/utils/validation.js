@@ -27,6 +27,20 @@ const WorkSpaceSchema = z.object({
   title: z.string().min(6, { message: "Минмум 6 символов" }),
 });
 
+const validateUrl = (url) => {
+  try {
+    new URL(url);
+  } catch {
+    throw new Error('Invalid URL format');
+  }
+};
+
+const validateFile = (file) => {
+  if (!file || file.mimetype !== 'text/html') {
+    throw new Error('Invalid HTML file');
+  }
+};
+
 module.exports = {
   LoginSchema,
   RegisterSchema,
@@ -34,4 +48,6 @@ module.exports = {
   PasswordSchema,
   EmailSchema,
   WorkSpaceSchema,
+  validateUrl,
+  validateFile,
 };

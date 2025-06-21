@@ -26,7 +26,7 @@ const getActionById = async (actionId) => {
  */
 const getAllActions = async () => {
   try {
-    const actions = await prisma.webElementActions.findMany();
+    const actions = await prisma.WebElementActions.findMany();
     return actions;
   } catch (error) {
     console.error("Error fetching actions:", error);

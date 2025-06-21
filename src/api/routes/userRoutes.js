@@ -1,6 +1,10 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { createUser, getUserById, updateUser } = require('../../services/userService');
+const {
+  createUser,
+  getUserById,
+  updateUser,
+} = require("../../services/userService");
 
 // /**
 //  * Регистрация нового пользователя.
@@ -52,19 +56,19 @@ const { createUser, getUserById, updateUser } = require('../../services/userServ
  * @param {Object} data - Данные для обновления (email, username, password).
  * @returns {Object} - Обновленный пользователь.
  */
-router.put('/:userId', async (req, res) => {
+router.put("/:userId", async (req, res) => {
   const { userId } = req.params;
   const { email, username, password } = req.body;
 
   if (!email && !username && !password) {
-    return res.status(400).json({ error: 'At least one field is required' });
+    return res.status(400).json({ error: "At least one field is required" });
   }
 
   try {
     const user = await updateUser(userId, { email, username, password });
     res.status(200).json(user);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to update user' });
+    res.status(500).json({ error: "Failed to update user" });
   }
 });
 

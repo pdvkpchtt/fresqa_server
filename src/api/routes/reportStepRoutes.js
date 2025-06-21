@@ -1,10 +1,10 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const {
   createReportStep,
   getReportStepById,
   getReportStepsByReportId,
-} = require('../../services/reportStepService');
+} = require("../../services/reportStepService");
 
 /**
  * Создание нового шага отчета.
@@ -14,18 +14,18 @@ const {
  * @param {boolean} status - Статус выполнения шага.
  * @returns {Object} - Созданный шаг отчета.
  */
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
   const { value, reportId, status } = req.body;
 
   if (!value || !reportId || status === undefined) {
-    return res.status(400).json({ error: 'All fields are required' });
+    return res.status(400).json({ error: "All fields are required" });
   }
 
   try {
     const reportStep = await createReportStep(value, reportId, status);
     res.status(201).json(reportStep);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to create report step' });
+    res.status(500).json({ error: "Failed to create report step" });
   }
 });
 
@@ -35,17 +35,17 @@ router.post('/', async (req, res) => {
  * @param {string} reportStepId - ID шага отчета.
  * @returns {Object} - Найденный шаг отчета.
  */
-router.get('/:reportStepId', async (req, res) => {
+router.get("/:reportStepId", async (req, res) => {
   const { reportStepId } = req.params;
 
   try {
     const reportStep = await getReportStepById(reportStepId);
     if (!reportStep) {
-      return res.status(404).json({ error: 'Report step not found' });
+      return res.status(404).json({ error: "Report step not found" });
     }
     res.status(200).json(reportStep);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch report step' });
+    res.status(500).json({ error: "Failed to fetch report step" });
   }
 });
 
@@ -55,14 +55,14 @@ router.get('/:reportStepId', async (req, res) => {
  * @param {string} reportId - ID отчета.
  * @returns {Array} - Список шагов отчета.
  */
-router.get('/report/:reportId', async (req, res) => {
+router.get("/report/:reportId", async (req, res) => {
   const { reportId } = req.params;
 
   try {
     const reportSteps = await getReportStepsByReportId(reportId);
     res.status(200).json(reportSteps);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch report steps' });
+    res.status(500).json({ error: "Failed to fetch report steps" });
   }
 });
 
