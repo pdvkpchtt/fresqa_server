@@ -18,7 +18,6 @@ const pool = new Pool({
 
 const app = express();
 
-app.set("view engine", "ejs");
 app.use(express.json()); // из за этой строки я убил все нервные клетки
 app.use(
   cors({
