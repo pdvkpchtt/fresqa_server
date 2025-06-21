@@ -353,6 +353,7 @@ router.post("/create_password", async (req, res) => {
       projectId: project?.id,
     });
   } catch (err) {
+    console.log("err-----------------", err);
     return res.status(500).json({ error: "Something went wrong" });
   }
 });
