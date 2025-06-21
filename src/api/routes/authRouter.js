@@ -33,6 +33,8 @@ router
   .route("/login")
   .get(async (req, res) => {
     try {
+      console.log(req.session);
+
       if (req?.session?.user && req.session?.user?.id)
         return res.status(200).json({
           loggedIn: true,
