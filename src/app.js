@@ -15,7 +15,10 @@ app.set("view engine", "ejs");
 app.use(express.json()); // из за этой строки я убил все нервные клетки
 app.use(
   cors({
-    origin: "http://localhost:5000",
+    origin: [
+      "http://localhost:5000",
+      "https://pdvkpchtt-fresqa-server-3721.twc1.net/",
+    ],
     credentials: true,
   })
 );

@@ -216,6 +216,8 @@ router.post("/check_code", async (req, res) => {
       id: user?.id,
     };
 
+    console.log(req.session, "req.session from router");
+
     return res.status(200).json({
       message: `Email has been successfully confirmed`,
     });
