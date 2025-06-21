@@ -11,6 +11,7 @@ const { initializeViewPorts } = require("./services/viewPortService");
 
 const app = express();
 
+app.set("view engine", "ejs");
 app.use(express.json()); // из за этой строки я убил все нервные клетки
 app.use(
   cors({
@@ -24,7 +25,7 @@ app.use(bodyParser.json());
 const store = new (connectPgSimple(session))({ createTableIfMissing: true });
 app.use(
   session({
-    store: store,
+    store,
     secret: "myscecret",
     saveUninitialized: false,
     resave: false,
@@ -38,11 +39,11 @@ app.use(
 );
 // храним экспресс сессию в призме
 
-// app.get("/", async (req, res) => {
-//   req.session.destroy();
-//   console.log(req.session?.user);
-//   res.send("/ass");
-// });
+app.get("/", async (req, res) => {
+  // req.session.destroy();
+  console.log(req.session?.user);
+  res.send("/ass");
+});
 
 // Роуты
 app.use("/api", router);
