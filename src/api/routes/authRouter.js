@@ -322,7 +322,9 @@ router.post("/create_password", async (req, res) => {
     // валидация полей
 
     // проверяем, существует ли юзер с таки айди
-    const existingUser = await getUserById(req.session?.user?.id);
+    const existingUser = await getUserById(
+      "m9ul4djo5tzoakgoecvgkx6d noPassword"
+    );
     if (!existingUser || !existingUser?.emailVerified)
       return res.status(500).json({ error: "Something went wrong" });
     // проверяем, существует ли юзер с таки айди
@@ -331,7 +333,7 @@ router.post("/create_password", async (req, res) => {
     const hashedPass = await bcrypt.hash(password, 10);
 
     const user = await prisma.user.update({
-      where: { id: req.session?.user?.id },
+      where: { id: "m9ul4djo5tzoakgoecvgkx6d noPassword" },
       data: {
         id: createId(),
         password: hashedPass,
