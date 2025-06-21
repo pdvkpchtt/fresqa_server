@@ -8,6 +8,13 @@ const {
   initializeWebElementActions,
 } = require("./services/webElementActionsService");
 const { initializeViewPorts } = require("./services/viewPortService");
+const { Pool } = require("pg");
+const pgSession = require("connect-pg-simple")(session);
+
+const pool = new Pool({
+  connectionString:
+    "postgresql://gen_user:LdlM1Zr0cf@46.149.66.179:5432/default_db",
+});
 
 const app = express();
 
@@ -25,19 +32,16 @@ app.use(
 app.use(bodyParser.json());
 
 // храним экспресс сессию в призме
-const store = new (connectPgSimple(session))({ createTableIfMissing: true });
 app.use(
   session({
-    store,
-    secret: "myscecret",
-    saveUninitialized: false,
+    store: new pgSession({
+      pool, // Подключение к Postgres
+      tableName: "session", // Можно изменить имя таблицы
+    }),
+    secret: "secret",
     resave: false,
-    cookie: {
-      secure: false,
-      httpOnly: false,
-      sameSite: false,
-      maxAge: 1000 * 60 * 60 * 24 * 7 * 30,
-    },
+    saveUninitialized: false,
+    cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 дней
   })
 );
 // храним экспресс сессию в призме
